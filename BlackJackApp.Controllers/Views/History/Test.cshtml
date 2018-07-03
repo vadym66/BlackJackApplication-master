@@ -1,35 +1,38 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<ShowGamesHistoryViewModel>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Kendo UI Snippet</title>
+    <title></title>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
 
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.default.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.dataviz.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.dataviz.default.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.mobile.all.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
 
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.2.805/js/kendo.all.min.js"></script>
+
 </head>
 <body>
-    <div id="grid"></div>
-    <script>
-        var offset = 10;
+    <div id="temp"></div>
 
-        $("#grid").kendoGrid({
+    <script>
+            var jsonObj = $.getJSON("@Url.Action("ShowGames", "History")", function (data) {
+                for (var i = 0, len = data.length; i < len; i++) {
+                    console.log(data[i]);
+                }
+            });
+
+            $("#temp").kendoGrid({
                 dataSource: {
                     transport: {
                         read: {
-                            url: "@Url.Action("GetGames", "History")",
-                            dataType: "json",
-                            type: "post"
+                            url: "@Url.Action("Test2", "History")",
+                            dataType: "json"
                         }
-                    },
-            },
-            height: 600,
+                    }
+                },
+                height: 550,
+                sortable: true,
                 columns: [
                     { field: "GameId" },
                     { field: "HumanName" },
@@ -38,54 +41,19 @@
                         type: "date",
                         format: "{0:MMMM/dd/yyyy H:mm}"
                     },
-                    { command: { text: "View Details", click: showDetails}, title: " ", width: "180px" }
+                    { command: { text: "View Details", click: showDetails }, title: " ", width: "180px" }
                 ]
             });
 
-        $("#add").on("click", function () {
-            var grid = $("#grid").data("kendoGrid");
-            offset += 10;
-            $.ajax(
-                {
-                    type: 'POST',
-                    url: '@Url.Action("Test2", "History")',
-                    data: {offset: offset},
-                    dataType: 'json',
-                    success: function (result) {
-                        for (var i = 0; i < result.length; i++) {
-                            var date = new Date(result[i].GameCreation);
-                            grid.dataSource.add({ GameId: result[i].GameId, HumanName: result[i].HumanName, GameCreation: date});
-                        }
-                    }
-                });
-
-        });
-        function showDetails(e) {
+           function showDetails(e) {
                e.preventDefault();
                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-               Id = dataItem.GameId;
-               window.open("@Url.Action("Details", "History")/" + Id);
-        };
 
-        $(".k-grid-content").on("scroll", function () {
-            if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-                var grid = $("#grid").data("kendoGrid");
-                offset += 5;
-                $.ajax(
-                    {
-                        type: 'POST',
-                        url: '@Url.Action("Test2", "History")',
-                        data: {offset: offset},
-                        dataType: 'json',
-                        success: function (result) {
-                            for (var i = 0; i < result.length; i++) {
-                                var date = new Date(parseInt(result[i].GameCreation.substr));
-                                grid.dataSource.add({ GameId: result[i].GameId, HumanName: result[i].HumanName, GameCreation: date});
-                            }
-                        }
-                    });
+               Id = dataItem.GameId;
+               debugger;
+               window.open("@Url.Action("Test2", "History")/" + Id);
             }
-        });
+
     </script>
 </body>
 </html>
