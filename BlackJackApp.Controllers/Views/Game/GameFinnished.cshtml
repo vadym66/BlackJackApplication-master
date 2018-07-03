@@ -1,0 +1,81 @@
+﻿@model BlackJackApp.Services.RoundGameViewModel
+    <ul class="flex-container">
+        @foreach (var round in Model.Users)
+        {
+        <div class="flex-item">
+            <div>@round.UserName</div>
+            <div>Points: @round.CardSum</div>
+            @foreach (var card in round.Cards)
+            {
+                <ul>@card.Rank/ @card.Suit</ul>
+            }
+            @if (round.UserName != "Dealer")
+            {
+                <div>Status: @round.PlayerStatus</div>
+            }
+        </div>
+        }
+    </ul>
+
+<div style="text-align:center">
+@using (Html.BeginForm("ShowGames",
+            "History"))
+{
+    <input type="submit" value="Go to history" id="toHistory" />
+}
+</div>
+<div style="text-align:center">
+    @using (Html.BeginForm("Start",
+            "Game"))
+    {
+        <input type="submit" value="Finish" id="toStart" />
+    }
+</div>
+    <script>
+        $("#toHistory").kendoButton();
+        $("#toStart").kendoButton();
+    </script>
+
+    <style>
+        div {
+            padding-bottom: .7em;
+        }
+
+        .flex-container {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-flow: row wrap;
+            justify-content: space-around;
+            /*align-items: flex-end;*/
+        }
+
+        .flex-item {
+            padding: 5px;
+            width: 200px;
+            height: 300px;
+            margin-top: 10px;
+            line-height: 30px;
+            color: black;
+            font-weight: bold;
+            font-size: medium;
+            text-align: center;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            text-align: center;
+            font-weight: 100
+        }
+
+        li {
+            text-align: center;
+        }
+    </style>

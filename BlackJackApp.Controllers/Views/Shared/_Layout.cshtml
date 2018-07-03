@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - My BlackJack MVC Application</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+
+    <link href="https://kendo.cdn.telerik.com/2016.3.914/styles/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.3.914/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.3.914/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.3.914/styles/kendo.material.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.3.914/styles/kendo.dataviz.material.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://kendo.cdn.telerik.com/2016.3.914/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.3.914/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.3.914/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")">
+    </script>
+
+
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row k-header" style="text-align:left">
+            <h1>Black Jack App</h1>
+            <h1>@Html.ActionLink("Start Game", "Start", "Game")</h1>
+            <h1>@Html.ActionLink("History", "ShowGames", "History")</h1>
+        </div>
+    </div>
+
+
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render()
+</body>
+</html>
