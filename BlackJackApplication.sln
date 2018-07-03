@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackApp.Services", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackApp.ViewModels", "BlackJackApp.ViewModels\BlackJackApp.ViewModels.csproj", "{C0101599-9B70-4398-B8ED-D37FEBAC0199}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackApp.Controllers", "BlackJackApp.Controllers\BlackJackApp.Controllers.csproj", "{B97290B0-7D15-42EA-99B5-E7B030FD469D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackApp.MVC", "BlackJackApp.Controllers\BlackJackApp.MVC.csproj", "{B97290B0-7D15-42EA-99B5-E7B030FD469D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
