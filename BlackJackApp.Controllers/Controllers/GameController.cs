@@ -14,7 +14,6 @@ namespace BlackJackApp.Controllers.Controllers
             _gameService = gameService;
         }
 
-        
         public async Task<ActionResult> Start()
         {
             return View();

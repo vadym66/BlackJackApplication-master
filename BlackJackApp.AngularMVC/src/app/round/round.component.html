@@ -1,0 +1,15 @@
+<div>
+    <div *ngFor="let round of rounds">
+      <div>{{round.Gameid}}</div>
+      <ul>
+        <li *ngFor="let user of round.Users">
+          <div>{{user.UserName}}</div>
+          <ul>
+            <li *ngFor="let card of user.Cards">
+              <div>{{card.Rank}} {{card.Suit}}</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</div>
