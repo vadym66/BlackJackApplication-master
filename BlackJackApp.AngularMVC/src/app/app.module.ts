@@ -1,18 +1,27 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { AppComponent } from './app.component';
-import { RoundComponent } from './round/round.component';
-
+import { StartGame } from '../app/start-game/start-game.component';
 
 @NgModule({
-  imports: [BrowserModule,
-    FormsModule],
-
-  declarations: [AppComponent,
-    RoundComponent],
-
+  declarations: [
+      AppComponent,
+      StartGame
+  ],
+  imports: [
+      BrowserModule,
+      ButtonsModule,
+      InputsModule,
+      BrowserAnimationsModule,
+      DropDownsModule
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

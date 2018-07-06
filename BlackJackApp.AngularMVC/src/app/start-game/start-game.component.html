@@ -1,0 +1,16 @@
+<h1>
+    {{title}}
+</h1>
+<div class="container"> 
+    <kendo-textbox-container floatingLabel="First name">
+        <input kendoTextBox />
+    </kendo-textbox-container>
+</div>
+<div class="col-xs-12 col-sm-6 example-col">
+    <p>DropDownList</p>
+    <kendo-dropdownlist [data]="listItems" [value]="'0'">
+    </kendo-dropdownlist>
+</div>
+<div>
+    <button kendoButton (click)="onButtonClick()" [primary]="true">My Kendo UI Button</button>
+</div>

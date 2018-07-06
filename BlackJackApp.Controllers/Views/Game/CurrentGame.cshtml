@@ -41,6 +41,7 @@
 
 <script type="text/javascript">
     function OnSuccess(data) {
+        console.log(data);
         if (data.result) {
             window.location.href = data.url;
         }
