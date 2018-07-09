@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/common/http");
 var kendo_angular_buttons_1 = require("@progress/kendo-angular-buttons");
 var kendo_angular_inputs_1 = require("@progress/kendo-angular-inputs");
-var app_component_1 = require("./app.component");
-var start_game_component_1 = require("../app/start-game/start-game.component");
 var animations_1 = require("@angular/platform-browser/animations");
 var kendo_angular_dropdowns_1 = require("@progress/kendo-angular-dropdowns");
+var app_component_1 = require("./app.component");
+var start_game_component_1 = require("../app/start-game/start-game.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -28,7 +29,8 @@ var AppModule = /** @class */ (function () {
                 kendo_angular_buttons_1.ButtonsModule,
                 kendo_angular_inputs_1.InputsModule,
                 animations_1.BrowserAnimationsModule,
-                kendo_angular_dropdowns_1.DropDownsModule
+                kendo_angular_dropdowns_1.DropDownsModule,
+                http_1.HttpClientModule
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

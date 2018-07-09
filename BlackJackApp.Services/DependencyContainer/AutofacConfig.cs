@@ -64,9 +64,7 @@ namespace BlackJackApp.Controllers.Util
                                       new NamedParameter("playerGameRepository", new PlayersGameRepository<PlayerGames>())
                                     });
 
-            var container = builder.Build();
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+           
         }
     }
 }

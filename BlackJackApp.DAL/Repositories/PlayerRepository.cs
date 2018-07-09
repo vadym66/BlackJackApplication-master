@@ -19,14 +19,15 @@ namespace BlackJackApp.Services
             }
         }
 
-        public async Task<IEnumerable<Player>> GetAll()
+        public async Task<IEnumerable<string>> GetAll()
         {
             using (var connection = ConnectionFactory.GetOpenDbConnection())
             {
-                var sql = @"SELECT * 
-                            FROM Players";
+                var sql = @"SELECT DISTINCT  Players.Name 
+                            FROM Players
+                            WHERE PlayerRole = 0";
 
-                return await connection.QueryAsync<Player>(sql);
+                return await connection.QueryAsync<string>(sql);
             }
         }
 

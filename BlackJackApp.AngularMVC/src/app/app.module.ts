@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
@@ -19,7 +20,8 @@ import { StartGame } from '../app/start-game/start-game.component';
       ButtonsModule,
       InputsModule,
       BrowserAnimationsModule,
-      DropDownsModule
+      DropDownsModule,
+      HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

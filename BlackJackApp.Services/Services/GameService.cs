@@ -55,6 +55,20 @@ namespace BlackJackApp.Services
             return await CompleteRound(roundModel);
         }
 
+        public async Task<IEnumerable<User>> GetPlayers()
+        {
+            var userList = new List<User>();
+            var result = await _playerRepository.GetAll();
+
+            foreach (var item in result)
+            {
+                var user = new User();
+                user.Name = item;
+                userList.Add(user);
+            }
+            return userList;
+        }
+
         private async Task<RoundGameViewModel> CompleteRound(RoundGameViewModel roundModel)
         {
             var humanPlayer = GetHumanPlayer(roundModel.Users);
