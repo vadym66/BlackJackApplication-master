@@ -36,7 +36,34 @@ namespace BlackJackApp.Services
             _playersGameRepository = playersGameRepository;
         }
 
-        public async Task<RoundGameViewModel> StartGame(StartGameViewModel viewFromUI)
+        public async Task<int> StartGameForApi(StartGameView viewFromUI)
+        {
+            int gameId = await CreateGame(viewFromUI.PlayerName, viewFromUI.BotQuantity);
+            var rounds = new List<Round>();
+
+            rounds.AddRange(await CreateHuman(viewFromUI.PlayerName, gameId));
+            if (viewFromUI.BotQuantity != 0)
+            {
+                rounds.AddRange(await CreateBots(viewFromUI.BotQuantity, gameId));
+            }
+            rounds.AddRange(await CreateDealer(gameId));
+
+            return gameId;
+        }
+
+        public async Task<RoundGameView> GetRounds(int id)
+        {
+            var rounds = await _roundRepository.GetRounds(id);
+
+            var roundModel = await MappingToViewModel(rounds);
+
+            await CheckRules(roundModel);
+
+            return await CompleteRound(roundModel);
+
+        }
+
+        public async Task<RoundGameView> StartGame(StartGameView viewFromUI)
         {
             int gameId = await CreateGame(viewFromUI.PlayerName, viewFromUI.BotQuantity);
             var rounds = new List<Round>();
@@ -55,21 +82,21 @@ namespace BlackJackApp.Services
             return await CompleteRound(roundModel);
         }
 
-        public async Task<IEnumerable<User>> GetPlayers()
+        public async Task<IEnumerable<UserViewModel>> GetPlayers()
         {
-            var userList = new List<User>();
+            var userList = new List<UserViewModel>();
             var result = await _playerRepository.GetAll();
 
             foreach (var item in result)
             {
-                var user = new User();
+                var user = new UserViewModel();
                 user.Name = item;
                 userList.Add(user);
             }
             return userList;
         }
 
-        private async Task<RoundGameViewModel> CompleteRound(RoundGameViewModel roundModel)
+        private async Task<RoundGameView> CompleteRound(RoundGameView roundModel)
         {
             var humanPlayer = GetHumanPlayer(roundModel.Users);
             var dealer = GetDealer(roundModel.Users);
@@ -82,7 +109,7 @@ namespace BlackJackApp.Services
                     await CheckDealer(roundModel.Users);
                     await FinalPointsCount(roundModel);
                 }
-                roundModel.isResultComplete = true;
+                roundModel.IsResultComplete = true;
                 return roundModel;
             }
             if (dealer.PlayerStatus == PlayerStatus.Winner)
@@ -94,7 +121,7 @@ namespace BlackJackApp.Services
                         player.PlayerStatus = PlayerStatus.Lose;
                     }
                 };
-                roundModel.isResultComplete = true;
+                roundModel.IsResultComplete = true;
 
                 return roundModel;
             }
@@ -108,7 +135,7 @@ namespace BlackJackApp.Services
                         player.PlayerStatus = PlayerStatus.Winner;
                     }
                 };
-                roundModel.isResultComplete = true;
+                roundModel.IsResultComplete = true;
                 return roundModel;
             }
 
@@ -120,7 +147,7 @@ namespace BlackJackApp.Services
             return roundModel;
         }
 
-        public async Task<RoundGameViewModel> NextRoundForPlayers(int gameId)
+        public async Task<RoundGameView> NextRoundForPlayers(int gameId)
         {
             var rounds = new List<Round>();
 
@@ -131,7 +158,7 @@ namespace BlackJackApp.Services
             foreach (var item in result)
             {
                 int cardSum = 0;
-                Player player = new Player();
+                var player = new Player();
                 foreach (var round in item)
                 {
                     player = round.Player;
@@ -151,7 +178,7 @@ namespace BlackJackApp.Services
             return await CompleteRound(roundModel);
         }
 
-        public async Task<RoundGameViewModel> NextRoundForDealer(int gameId)
+        public async Task<RoundGameView> NextRoundForDealer(int gameId)
         {
             var rounds = new List<Round>();
             rounds = await _roundRepository.GetRounds(gameId);
@@ -162,7 +189,7 @@ namespace BlackJackApp.Services
 
         }
 
-        private async Task<RoundGameViewModel> FinalPointsCount(RoundGameViewModel roundModel)
+        private async Task<RoundGameView> FinalPointsCount(RoundGameView roundModel)
         {
             var dealer = GetDealer(roundModel.Users);
 
@@ -201,11 +228,11 @@ namespace BlackJackApp.Services
                 }
             }
 
-            roundModel.isResultComplete = true;
+            roundModel.IsResultComplete = true;
             return roundModel;
         }
 
-        private void UpdateStatus(RoundGameViewModel roundModel)
+        private void UpdateStatus(RoundGameView roundModel)
         {
             foreach (var player in roundModel.Users)
             {
@@ -312,7 +339,7 @@ namespace BlackJackApp.Services
             return round;
         }
 
-        private async Task CreateNextRoundForDealer(PlayerNextRoundViewItem dealer)
+        private async Task CreateNextRoundForDealer(PlayerNextRoundView dealer)
         {
             var round = new Round();
             var card = new Card();
@@ -323,7 +350,7 @@ namespace BlackJackApp.Services
             round.GameId = dealer.GameId;
             round.CardId = card.Id;
 
-            var cardViewModel = new CardGameViewItem();
+            var cardViewModel = new CardGameView();
             cardViewModel.Rank = card.Rank.ToString();
             cardViewModel.Suit = card.Suit.ToString();
             cardViewModel.Value = card.Value;
@@ -345,7 +372,7 @@ namespace BlackJackApp.Services
             }
         }
 
-        private async Task CheckDealer(List<PlayerNextRoundViewItem> players)
+        private async Task CheckDealer(List<PlayerNextRoundView> players)
         {
             foreach (var player in players)
             {
@@ -362,7 +389,7 @@ namespace BlackJackApp.Services
             }
         }
         
-        private PlayerNextRoundViewItem GetHumanPlayer(List<PlayerNextRoundViewItem> players)
+        private PlayerNextRoundView GetHumanPlayer(List<PlayerNextRoundView> players)
         {
             foreach (var player in players)
             {
@@ -374,7 +401,7 @@ namespace BlackJackApp.Services
             return null;
         }
 
-        private PlayerNextRoundViewItem GetDealer(List<PlayerNextRoundViewItem> players)
+        private PlayerNextRoundView GetDealer(List<PlayerNextRoundView> players)
         {
             foreach (var player in players)
             {
@@ -386,20 +413,20 @@ namespace BlackJackApp.Services
             return null;
         }
 
-        private async Task<RoundGameViewModel> MappingToViewModel(List<Round> rounds)
+        private async Task<RoundGameView> MappingToViewModel(List<Round> rounds)
         {
             var result = rounds.GroupBy(p => p.Player.Name);
-            var roundViewModel = new RoundGameViewModel();
+            var roundViewModel = new RoundGameView();
             int gameId = 0;
 
             foreach (var round in result)
             {
-                var userModel = new PlayerNextRoundViewItem();
+                var userModel = new PlayerNextRoundView();
                 userModel.UserName = round.Key;
 
                 foreach (var item in round)
                 {
-                    var cardViewModel = new CardGameViewItem();
+                    var cardViewModel = new CardGameView();
                     PlayerGames playerGames = await GetPlayerStatus(item.PlayerId, item.GameId);
 
                     userModel.PlayerId = item.PlayerId;
@@ -430,7 +457,7 @@ namespace BlackJackApp.Services
         private async Task<PlayerGames> GetPlayerStatus(int playerId, int gameId)
             => await _playersGameRepository.GetStatus(playerId, gameId);
 
-        private async Task CheckRules(RoundGameViewModel roundModel)
+        private async Task CheckRules(RoundGameView roundModel)
         {
             foreach (var player in roundModel.Users) // check for blackJack
             {

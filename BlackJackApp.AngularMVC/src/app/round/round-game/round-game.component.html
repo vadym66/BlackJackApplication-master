@@ -1,0 +1,38 @@
+<ul class="flex-container">
+  <ng-container *ngFor="let user of roundView.users">
+    <li class="flex-item" *ngIf="user.playerRole!=2">
+      <div style="font-weight:bold">{{ user.userName }}</div>
+      <div style="font-weight:bold">Points:{{ user.cardSum }}</div>
+      <div *ngFor="let card of user.cards">
+        <div>{{card.rank}} / {{card.suit}}</div>
+      </div>
+      <div *ngIf="roundView.isResultComplete==true">status: {{getStatus(user.playerStatus)}}</div>
+    </li>
+  </ng-container>
+</ul>
+<ul class="flex-container">
+  <ng-container *ngFor="let user of roundView.users">
+    <li class="flex-item" *ngIf="user.playerRole==2">
+      <div style="font-weight:bold">{{ user.userName }}</div>
+      <div style="font-weight:bold">Points:{{ user.cardSum }}</div>
+      <div *ngFor="let card of user.cards">
+        <div>{{card.rank}} / {{card.suit}}</div>
+      </div>
+    </li>
+  </ng-container>
+</ul>
+
+<ul id="buttons">
+  <li *ngIf="!complete">
+    <button kendoButton (click)="onTakeButtonClick()">Take</button>
+  </li>
+  <li *ngIf="!complete">
+    <button kendoButton (click)="onEnoughButtonClick()">Enough</button>
+  </li>
+  <li *ngIf="complete">
+    <button kendoButton (click)="onFinishButtonClick()">Finish</button>
+  </li>
+  <li *ngIf="complete">
+    <button kendoButton (click)="onHistoryButtonClick()">To history</button>
+  </li>
+</ul>

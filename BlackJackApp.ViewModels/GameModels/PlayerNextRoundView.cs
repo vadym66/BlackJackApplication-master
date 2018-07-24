@@ -1,0 +1,31 @@
+﻿using BlackJackApp.Services.Enums;
+using BlackJackApp.ViewModels.Enums;
+using System.Collections.Generic;
+
+
+namespace BlackJackApp.ViewModels
+{
+    public class PlayerNextRoundView 
+    {
+        public int GameId { get; set; }
+
+        public int RoundId { get; set; }
+
+        public int PlayerId { get; set; }
+
+        public int CardSum { get; set; }
+
+        public string UserName { get; set; }
+
+        public PlayerStatus PlayerStatus { get; set; }
+
+        public PlayerRole PlayerRole { get; set; }
+
+        public List<CardGameView> Cards { get; set; }
+
+        public PlayerNextRoundView()
+        {
+            Cards = new List<CardGameView>();
+        }
+    }
+}

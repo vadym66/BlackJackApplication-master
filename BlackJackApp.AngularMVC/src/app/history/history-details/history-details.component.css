@@ -1,0 +1,45 @@
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.flex-item {
+    padding: 5px;
+    width: 200px;
+    height: 300px;
+    margin-top: 10px;
+    line-height: 30px;
+    color: black;
+    font-size: medium;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    list-style: none;
+}
+
+    #buttons button {
+        font-size: 20px;
+    }
+
+    #buttons li {
+        margin-bottom: 4px;
+    }

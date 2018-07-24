@@ -10,12 +10,7 @@ namespace BlackJackApp.AngularMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult StartGame()
-        {
-            return PartialView();
+            return new FilePathResult("~/Scripts/libs/Index.html", "text/html");
         }
     }
 }

@@ -1,0 +1,30 @@
+<ul class="flex-container">
+    <ng-container *ngFor="let user of gameDetailsModel">
+        <li class="flex-item" *ngIf="user.playerRole!='dealer'">
+            <div style="font-weight:bold">{{ user.userName }}</div>
+            <div style="font-weight:bold">Points:{{ user.cardSum }}</div>
+            <div *ngFor="let card of user.cards">
+                <div>{{card.rank}} / {{card.suit}}</div>
+            </div>
+            <div style="font-weight:bold">{{ user.status }}</div>
+        </li>
+    </ng-container>
+</ul>
+<ul class="flex-container">
+    <ng-container *ngFor="let user of gameDetailsModel">
+        <li class="flex-item" *ngIf="user.userName=='dealer'">
+            <div style="font-weight:bold">{{ user.userName }}</div>
+            <div style="font-weight:bold">Points:{{ user.cardSum }}</div>
+            <div *ngFor="let card of user.cards">
+                <div>{{card.rank}} / {{card.suit}}</div>
+            </div>
+            <div style="font-weight:bold">{{ user.status }}</div>
+        </li>
+    </ng-container>
+</ul>
+
+<ul id="buttons">
+    <li>
+        <button kendoButton (click)="onButtonClick()">back</button>
+    </li>
+</ul>

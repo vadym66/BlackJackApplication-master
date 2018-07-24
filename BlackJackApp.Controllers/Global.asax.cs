@@ -13,7 +13,6 @@ namespace BlackJackApp.Controllers
     {
         protected void Application_Start()
         {
-
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);

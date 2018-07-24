@@ -6,7 +6,8 @@ namespace BlackJackApp.Services.ServiceInterfaces
 {
     public interface IHistoryService
     { 
-        Task<List<DetailHistoryViewModel>> Details(int gameId);
-        Task<IEnumerable<ShowGamesHistoryViewModel>> GetLastTenGames(int offset);
+        Task<List<DetailHistoryView>> Details(int gameId);
+        Task<IEnumerable<ShowGamesHistoryView>> GetLastTenGames(int offset);
+        Task<IEnumerable<ShowGamesHistoryView>> GetAllGames();
     }
 }

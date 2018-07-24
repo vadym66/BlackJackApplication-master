@@ -1,0 +1,20 @@
+<ul id="fieldList">
+    <li>
+        <kendo-combobox [data]="users"
+                        [allowCustom]="true"
+                        [(ngModel)]="startModel.playerName"
+                        (valueChange)="onValueChange($event)">
+        </kendo-combobox>
+    </li>
+    <li>
+        <kendo-dropdownlist [data]="botItems" 
+                            [value]="0" 
+                            [(ngModel)]="startModel.botQuantity">
+        </kendo-dropdownlist>
+    </li>
+    <li>
+        <button kendoButton (click)="onButtonClick()"
+                [disabled]="emptyItem">Start</button>
+    </li>
+</ul>
+

@@ -23,21 +23,28 @@ namespace BlackJackApp.Services.Services
             _playersGameRepository = playerGameRepository;
         }
 
-        public async Task<IEnumerable<ShowGamesHistoryViewModel>> GetLastTenGames(int offset)
+        public async Task<IEnumerable<ShowGamesHistoryView>> GetLastTenGames(int offset)
         {
             var query =  await _gameRepository.GetLastTen(offset);
 
             return await CreateGameHistoryViewModel(query);
         }
 
-        private async Task<IEnumerable<ShowGamesHistoryViewModel>> CreateGameHistoryViewModel(IEnumerable<Game> games)
+        public async Task<IEnumerable<ShowGamesHistoryView>> GetAllGames()
         {
-            var listOfViewModel = new List<ShowGamesHistoryViewModel>();
+            var query = await _gameRepository.GetAll();
+
+            return await CreateGameHistoryViewModel(query);
+        }
+
+        private async Task<IEnumerable<ShowGamesHistoryView>> CreateGameHistoryViewModel(IEnumerable<Game> games)
+        {
+            var listOfViewModel = new List<ShowGamesHistoryView>();
             foreach (var game in games)
             {
                 PlayerGames playerGames = await GetDetailsFromGame(game.Id);
 
-                var gameViewModel = new ShowGamesHistoryViewModel();
+                var gameViewModel = new ShowGamesHistoryView();
                 gameViewModel.HumanName = playerGames.Player.Name;
                 gameViewModel.GameCreation = playerGames.Game.Date;
                 gameViewModel.GameId = game.Id;
@@ -63,7 +70,7 @@ namespace BlackJackApp.Services.Services
             return query;
         }
 
-        public async Task<List<DetailHistoryViewModel>> Details(int gameId)
+        public async Task<List<DetailHistoryView>> Details(int gameId)
         {
 
             var rounds = await GetAllRoundsFromParticularGame(gameId);
@@ -71,16 +78,16 @@ namespace BlackJackApp.Services.Services
             var result = rounds.GroupBy(p => p.Player.Name);
             var playersGame = new PlayerGames();
 
-            var userModelList = new List<DetailHistoryViewModel>();
+            var userModelList = new List<DetailHistoryView>();
 
             foreach (var round in result)
             {
-                var userModel = new DetailHistoryViewModel();
+                var userModel = new DetailHistoryView();
                 userModel.UserName = round.Key;
 
                 foreach (var item in round)
                 {
-                    var cardViewModel = new CardHistoryViewItem();
+                    var cardViewModel = new CardHistoryView();
 
                     cardViewModel.Rank = item.Card.Rank.ToString();
                     cardViewModel.Suit = item.Card.Suit.ToString();

@@ -1,29 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { InputsModule } from '@progress/kendo-angular-inputs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 import { AppComponent } from './app.component';
-import { StartGame } from '../app/start-game/start-game.component';
+import { AppRoutingModule } from '../app/app-routing.module';
 
 @NgModule({
-  declarations: [
-      AppComponent,
-      StartGame
-  ],
-  imports: [
-      BrowserModule,
-      ButtonsModule,
-      InputsModule,
-      BrowserAnimationsModule,
-      DropDownsModule,
-      HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        GridModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

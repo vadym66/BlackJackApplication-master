@@ -6,9 +6,11 @@ namespace BlackJackApp.Services.ServiceInterfaces
 {
     public interface IGameService
     {
-        Task<RoundGameViewModel> StartGame(StartGameViewModel viewFromUI);
-        Task<RoundGameViewModel> NextRoundForPlayers(int gameId);
-        Task<RoundGameViewModel> NextRoundForDealer(int gameId);
-        Task<IEnumerable<User>> GetPlayers();
+        Task<RoundGameView> StartGame(StartGameView viewFromUI);
+        Task<RoundGameView> NextRoundForPlayers(int gameId);
+        Task<RoundGameView> NextRoundForDealer(int gameId);
+        Task<IEnumerable<UserViewModel>> GetPlayers();
+        Task<RoundGameView> GetRounds(int id);
+        Task<int> StartGameForApi(StartGameView viewFromUI);
     }
 }

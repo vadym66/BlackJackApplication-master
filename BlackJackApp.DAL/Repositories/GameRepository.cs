@@ -23,8 +23,9 @@ namespace BlackJackApp.Services
         {
             using (var connection = ConnectionFactory.GetOpenDbConnection())
             {
-                var sql = @"SELECT *
-                            FROM Games";
+                var sql = @"SELECT TOP 100 *
+                            FROM Games
+                            ORDER BY Id DESC";
 
                 return await connection.QueryAsync<Game>(sql);
             }
@@ -34,8 +35,8 @@ namespace BlackJackApp.Services
         {
             using (var connection = ConnectionFactory.GetOpenDbConnection())
             {
-                var sql = @"SELECT *      
-                            FROM Games 
+                var sql =   @"SELECT *      
+                            FROM Games
                             ORDER BY Id DESC
                             OFFSET @offset ROWS
                             FETCH NEXT 10 ROWS ONLY";

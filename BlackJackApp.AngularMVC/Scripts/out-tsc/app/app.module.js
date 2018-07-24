@@ -9,28 +9,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
-var kendo_angular_buttons_1 = require("@progress/kendo-angular-buttons");
-var kendo_angular_inputs_1 = require("@progress/kendo-angular-inputs");
 var animations_1 = require("@angular/platform-browser/animations");
-var kendo_angular_dropdowns_1 = require("@progress/kendo-angular-dropdowns");
+var kendo_angular_grid_1 = require("@progress/kendo-angular-grid");
 var app_component_1 = require("./app.component");
-var start_game_component_1 = require("../app/start-game/start-game.component");
+var app_routing_module_1 = require("../app/app-routing.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                app_component_1.AppComponent,
-                start_game_component_1.StartGame
+                app_component_1.AppComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
-                kendo_angular_buttons_1.ButtonsModule,
-                kendo_angular_inputs_1.InputsModule,
+                app_routing_module_1.AppRoutingModule,
                 animations_1.BrowserAnimationsModule,
-                kendo_angular_dropdowns_1.DropDownsModule,
-                http_1.HttpClientModule
+                http_1.HttpClientModule,
+                kendo_angular_grid_1.GridModule
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

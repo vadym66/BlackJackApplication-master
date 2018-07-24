@@ -33,6 +33,7 @@ namespace BlackJackApp.Controllers.Controllers
 
             return View(result);
         }
+
         public async Task<ActionResult> ShowGames()
         {
             var games = await _historyService.GetLastTenGames(offset: 0);
@@ -55,7 +56,5 @@ namespace BlackJackApp.Controllers.Controllers
             string json = JsonConvert.SerializeObject(games);
             return json;
         }
-
-       
     }
 }
