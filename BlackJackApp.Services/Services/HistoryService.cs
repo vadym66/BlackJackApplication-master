@@ -1,7 +1,6 @@
-﻿using BlackJackApp.DAL.Interfaces;
-using BlackJackApp.DataAccess.Interface;
+﻿using BlackJackApp.DataAccess.Interfaces;
 using BlackJackApp.Entities.Entities;
-using BlackJackApp.Services.ServiceInterfaces;
+using BlackJackApp.Services.Interfaces;
 using BlackJackApp.ViewModels.HistoryModels;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,9 @@ namespace BlackJackApp.Services.Services
         private IRoundRepository<Round> _roundRepository;
         private IPlayersGameRepository<PlayerGames> _playersGameRepository;
 
-        public HistoryService(IGameRepository<Game> gameRepository, IRoundRepository<Round> roundRepository, IPlayersGameRepository<PlayerGames> playerGameRepository)
+        public HistoryService(IGameRepository<Game> gameRepository, 
+                            IRoundRepository<Round> roundRepository, 
+                            IPlayersGameRepository<PlayerGames> playerGameRepository)
         {
             _gameRepository = gameRepository;
             _roundRepository = roundRepository;

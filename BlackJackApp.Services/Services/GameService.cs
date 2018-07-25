@@ -1,14 +1,13 @@
-﻿using BlackJackApp.DAL.Interfaces;
-using BlackJackApp.DataAccess.Interface;
-using BlackJackApp.Entities.Entities;
+﻿using BlackJackApp.Entities.Entities;
 using BlackJackApp.Entities.Enums;
 using BlackJackApp.Services.Enums;
 using BlackJackApp.ViewModels.GameModels;
-using BlackJackApp.Services.ServiceInterfaces;
+using BlackJackApp.Services.Interfaces;
 using BlackJackApp.ViewModels.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlackJackApp.DataAccess.Interfaces;
 
 namespace BlackJackApp.Services
 {

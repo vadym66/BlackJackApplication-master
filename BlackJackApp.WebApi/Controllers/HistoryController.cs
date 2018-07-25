@@ -1,4 +1,4 @@
-﻿using BlackJackApp.Services.ServiceInterfaces;
+﻿using BlackJackApp.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Web.Http;
 

@@ -1,0 +1,23 @@
+﻿@model BlackJackApp.ViewModels.GameModels.RoundGameView
+<link href="@Url.Content("~/Content/Flexes.css")" rel="stylesheet" type="text/css" />
+<ul class="flex-container">
+    @foreach (var round in Model.Users)
+    {
+        if (round.UserName == "Dealer")
+        {
+            <div class="flex-item">
+                <div>@round.UserName</div>
+                <div>Points: @round.CardSum</div>
+                @foreach (var card in round.Cards)
+                {
+                    <ul>@card.Rank / @card.Suit</ul>
+                }
+            </div>
+        }
+    }
+</ul>
+
+
+
+
+

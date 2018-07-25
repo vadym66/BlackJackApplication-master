@@ -1,8 +1,6 @@
-﻿using BlackJackApp.Services.ServiceInterfaces;
-using BlackJackApp.ViewModels;
+﻿using BlackJackApp.Services.Interfaces;
 using BlackJackApp.ViewModels.GameModels;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -75,9 +73,6 @@ namespace BlackJackApp.WebApi.Controllers
             {
                 throw new Exception($"something went wrong... {e.Message}");
             }
-
         }
     }
-
-
 }

@@ -1,0 +1,36 @@
+﻿@model BlackJackApp.ViewModels.GameModels.RoundGameView
+<link href="@Url.Content("~/Content/Flexes.css")" rel="stylesheet" type="text/css" />
+<ul class="flex-container">
+    @foreach (var round in Model.Users)
+    {
+        <div class="flex-item">
+            <div>@round.UserName</div>
+            <div>Points: @round.CardSum</div>
+            @foreach (var card in round.Cards)
+            {
+                <ul>@card.Rank/ @card.Suit</ul>
+            }
+            @if (round.UserName != "Dealer")
+            {
+                <div>Status: @round.PlayerStatus</div>
+            }
+        </div>
+    }
+</ul>
+
+<div style="text-align:center">
+    @using (Html.BeginForm("ShowGames",
+                "History"))
+    {
+        <input type="submit" value="Go to history" id="toHistory" />
+    }
+</div>
+<div style="text-align:center">
+    @using (Html.BeginForm("Start",
+            "Game"))
+    {
+        <input type="submit" value="Finish" id="toStart" />
+    }
+</div>
+
+@Scripts.Render("~/bundles/StartGameView/game-finished")

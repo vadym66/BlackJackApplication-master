@@ -3,7 +3,7 @@ using BlackJackApp.ViewModels.GameModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlackJackApp.Services.ServiceInterfaces
+namespace BlackJackApp.Services.Interfaces
 {
     public interface IGameService
     {

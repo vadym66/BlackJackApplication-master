@@ -1,16 +1,10 @@
 ﻿using Autofac;
-using Autofac.Core;
-using Autofac.Integration.Mvc;
-using BlackJackApp.DAL.Dapper;
-using BlackJackApp.DAL.Interfaces;
-using BlackJackApp.DAL.Repositories;
-using BlackJackApp.DataAccess.Interface;
+using BlackJackApp.DataAccess.Interfaces;
+using BlackJackApp.DataAccess.Repositories;
 using BlackJackApp.Entities.Entities;
 using BlackJackApp.Services;
-using BlackJackApp.Services.ServiceInterfaces;
+using BlackJackApp.Services.Interfaces;
 using BlackJackApp.Services.Services;
-using System.Collections.Generic;
-using System.Web.Mvc;
 
 namespace BlackJackApp.Controllers.Util
 {
