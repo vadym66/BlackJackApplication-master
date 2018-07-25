@@ -9,9 +9,15 @@ namespace BlackJackApp.DAL.Repositories
 {
     public class PlayersGameRepository<T> : IPlayersGameRepository<PlayerGames>
     {
+        private readonly string _connectionString;
+        public PlayersGameRepository(string con)
+        {
+            _connectionString = con;
+        }
+
         public async Task AddPlayer(Player player, int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"INSERT INTO PlayerGames(PlayerId, GameId)
                             VALUES(@PlayerId, @gameId)";
@@ -22,7 +28,7 @@ namespace BlackJackApp.DAL.Repositories
 
         public async Task UpdateStatus(int gameId, int playerId, int playerStatus)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"UPDATE PlayerGames
                             SET Status = @status
@@ -35,7 +41,7 @@ namespace BlackJackApp.DAL.Repositories
 
         public async Task<PlayerGames> GetStatus(int playerId, int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM PlayerGames
@@ -48,7 +54,7 @@ namespace BlackJackApp.DAL.Repositories
 
         public async Task<PlayerGames> Get(int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM PlayerGames

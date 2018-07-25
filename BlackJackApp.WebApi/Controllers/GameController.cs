@@ -1,5 +1,6 @@
 ﻿using BlackJackApp.Services.ServiceInterfaces;
 using BlackJackApp.ViewModels;
+using BlackJackApp.ViewModels.GameModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace BlackJackApp.WebApi.Controllers
         [Route("getPlayers")]
         public async Task<IHttpActionResult> GetPlayers()
         {
-            IEnumerable<UserViewModel> result = await _gameService.GetPlayers();
+            UserView result = await _gameService.GetPlayers();
             return Ok(result);
         }
 
@@ -28,7 +29,7 @@ namespace BlackJackApp.WebApi.Controllers
         [Route("create")]
         public async Task<IHttpActionResult> CreateGame(StartGameView startModel)
         {
-            var result = await _gameService.StartGameForApi(startModel);
+            var result = await _gameService.StartGame(startModel);
             return Ok(result);
         }
 
@@ -37,7 +38,7 @@ namespace BlackJackApp.WebApi.Controllers
         {
             try
             {
-                var result = await _gameService.GetRounds(id);
+                var result = await _gameService.GetFirstRound(id);
                 return Ok(result);
             }
             catch (Exception e)
@@ -52,7 +53,7 @@ namespace BlackJackApp.WebApi.Controllers
         {
             try
             {
-                var result = await _gameService.NextRoundForPlayers(id);
+                var result = await _gameService.CreateNextRoundForPlayers(id);
                 return Ok(result);
             }
             catch (Exception e)
@@ -67,7 +68,7 @@ namespace BlackJackApp.WebApi.Controllers
         {
             try
             {
-                var result = await _gameService.NextRoundForDealer(id);
+                var result = await _gameService.CreateNextRoundForDealer(id);
                 return Ok(result);
             }
             catch (Exception e)

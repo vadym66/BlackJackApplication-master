@@ -11,9 +11,15 @@ namespace BlackJackApp.Services
 {
     public class GameRepository<T> : IGameRepository<Game> where T : Game
     {
+        private readonly string _connectionString;
+        public GameRepository(string con)
+        {
+            _connectionString = con;
+        }
+
         public async Task<int> Add(Game game)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 return await connection.InsertAsync(game);
             }
@@ -21,7 +27,7 @@ namespace BlackJackApp.Services
 
         public async Task<IEnumerable<Game>> GetAll()
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT TOP 100 *
                             FROM Games
@@ -33,7 +39,7 @@ namespace BlackJackApp.Services
 
         public async Task<IEnumerable<Game>> GetLastTen(int offset)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql =   @"SELECT *      
                             FROM Games
@@ -47,7 +53,7 @@ namespace BlackJackApp.Services
 
         public async Task<IEnumerable<Player>> Get(int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT Players.Name
                             FROM PlayerGames

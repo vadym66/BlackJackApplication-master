@@ -1,7 +1,6 @@
-﻿using BlackJackApp.Services.ServiceInterfaces;
+﻿using BlackJackApp.ViewModels.GameModels;
 using BlackJackApp.ViewModels;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+using BlackJackApp.Services.ServiceInterfaces;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -16,42 +15,48 @@ namespace BlackJackApp.Controllers.Controllers
             _gameService = gameService;
         }
 
-        public async Task<ActionResult> Start()
+        public ActionResult Start()
         {
-            return View();
+            return View("StartGame");
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CurrentGame(StartGameView viewModel)
+        public async Task<ActionResult> StartGame(StartGameView viewModel)
         {
-            var result = await _gameService.StartGame(viewModel);
+            var gameId = await _gameService.StartGame(viewModel);
+            return RedirectToAction("GetFirstRound", new { id = gameId });
+        }
+
+        public async Task<ActionResult> GetFirstRound(int id)
+        {
+            var result = await _gameService.GetFirstRound(id);
             if (result.IsResultComplete)
             {
                 return View("GameFinnished", result);
             }
 
-            return View(result);
+            return View("CurrentGame", result);
         }
 
         [HttpPost]
-        public async Task<ActionResult> StartRoundForPlayers(int gameId)
+        public async Task<ActionResult> CreateNextRoundForPlayers(int gameId)
         {
-            var result = await _gameService.NextRoundForPlayers(gameId);
+            var result = await _gameService.CreateNextRoundForPlayers(gameId);
             ModelState.Clear();
             if (result.IsResultComplete)
             {
-                return Json(new { gameId = gameId,
-                    result = result.IsResultComplete,
-                    url = Url.Action("StartRoundForDealer", "Game",
-                                        new { gameId = gameId })});
+                return Json(new {
+                                gameId = gameId,
+                                result = result.IsResultComplete,
+                                url = Url.Action("CreateNextRoundForDealer", "Game", new { gameId = gameId })
+                                });
             }
 
             return PartialView(result);
         }
 
-        public async Task<ActionResult> StartRoundForDealer(int gameId)
+        public async Task<ActionResult> CreateNextRoundForDealer(int gameId)
         {
-            var result = await _gameService.NextRoundForDealer(gameId);
+            var result = await _gameService.CreateNextRoundForDealer(gameId);
             ModelState.Clear();
 
             return View("GameFinnished", result);

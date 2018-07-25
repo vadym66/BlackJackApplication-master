@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJackApp.ViewModels.Enums
 {
-    public enum PlayerRole
+    public enum PlayerRoleEnumView
     {
         Human = 0,
         Bot = 1,

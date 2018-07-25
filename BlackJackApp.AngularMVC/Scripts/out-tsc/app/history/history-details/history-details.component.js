@@ -20,9 +20,10 @@ var HistoryDetailsComponent = /** @class */ (function () {
     }
     HistoryDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = this.route.snapshot.paramMap.get('id');
-        this.gameId = parseInt(id);
-        console.log(this.gameId);
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.gameId = id;
+        });
         this.historyService.getDetails(this.gameId).subscribe(function (result) {
             _this.gameDetailsModel = result;
         });

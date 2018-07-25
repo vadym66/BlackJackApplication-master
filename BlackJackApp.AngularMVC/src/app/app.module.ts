@@ -6,10 +6,12 @@ import { GridModule } from '@progress/kendo-angular-grid';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from '../app/app-routing.module';
+import { HeaderComponent } from './header.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent
     ],
     imports: [
         BrowserModule,

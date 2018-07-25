@@ -18,53 +18,24 @@ namespace BlackJackApp.Controllers.Util
     {
         public static void ConfigureContainer(ContainerBuilder builder, string connectionString)
         {
-            builder.RegisterType<ConnectionFactory>().WithParameter(new NamedParameter("connectionString", connectionString));
+            builder.Register(c => new PlayerRepository<Player>(connectionString))
+                .As<IPlayerRepository<Player>>()
+                .InstancePerRequest();
+            builder.Register(c => new GameRepository<Game>(connectionString))
+                .As<IGameRepository<Game>>()
+                .InstancePerRequest();
+            builder.Register(c => new RoundRepository<Round>(connectionString))
+                .As<IRoundRepository<Round>>()
+                .InstancePerRequest();
+            builder.Register(c => new CardRepository<Card>(connectionString))
+                .As<ICardRepository<Card>>()
+                .InstancePerRequest(); 
+            builder.Register(c => new PlayersGameRepository<PlayerGames>(connectionString))
+                .As<IPlayersGameRepository<PlayerGames>>()
+                .InstancePerRequest();
 
-            builder.RegisterType<PlayerRepository<Player>>()
-                    .As<IPlayerRepository<Player>>()
-                    .PreserveExistingDefaults()
-                    .WithParameter(new TypedParameter(typeof(string),connectionString));
-
-            builder.RegisterType<GameRepository<Game>>()
-                    .As<IGameRepository<Game>>()
-                    .PreserveExistingDefaults()
-                    .WithParameter(new TypedParameter(typeof(string), connectionString)); ;
-
-            builder.RegisterType<RoundRepository<Round>>()
-                    .As<IRoundRepository<Round>>()
-                    .PreserveExistingDefaults()
-                    .WithParameter(new TypedParameter(typeof(string), connectionString)); ;
-
-            builder.RegisterType<CardRepository<Card>>()
-                    .As<ICardRepository<Card>>()
-                    .PreserveExistingDefaults()
-                    .WithParameter(new TypedParameter(typeof(string), connectionString)); ;
-
-            builder.RegisterType<PlayersGameRepository<PlayerGames>>()
-                    .As<IPlayersGameRepository<PlayerGames>>()
-                    .PreserveExistingDefaults()
-                    .WithParameter(new TypedParameter(typeof(string), connectionString)); ;
-
-            builder.RegisterType<GameService>()
-                .As<IGameService>()
-                .PreserveExistingDefaults()
-                .WithParameters(new List<Parameter>()
-                                    { new NamedParameter("gameRepository", new GameRepository<Game>()),
-                                      new NamedParameter("playerRepository", new PlayerRepository<Player>()),
-                                      new NamedParameter("roundRepository", new RoundRepository<Round>()),
-                                      new NamedParameter("cardRepository", new CardRepository<Card>()),
-                                      new NamedParameter("playersGameRepository", new PlayersGameRepository<PlayerGames>())
-                                    });
-
-            builder.RegisterType<HistoryService>()
-                .As<IHistoryService>()
-                .PreserveExistingDefaults()
-                .WithParameters(new List<Parameter>()
-                                    {
-                                      new NamedParameter("playerGameRepository", new PlayersGameRepository<PlayerGames>())
-                                    });
-
-           
+            builder.RegisterType<GameService>().As<IGameService>();
+            builder.RegisterType<HistoryService>().As<IHistoryService>();
         }
     }
 }

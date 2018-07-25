@@ -11,8 +11,7 @@ namespace BlackJackApp.WebApi
     public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
-        {
-            
+        {            
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());

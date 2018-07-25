@@ -6,4 +6,10 @@ var UserView = /** @class */ (function () {
     return UserView;
 }());
 exports.UserView = UserView;
+var UserViewItem = /** @class */ (function () {
+    function UserViewItem() {
+    }
+    return UserViewItem;
+}());
+exports.UserViewItem = UserViewItem;
 //# sourceMappingURL=user.view.js.map

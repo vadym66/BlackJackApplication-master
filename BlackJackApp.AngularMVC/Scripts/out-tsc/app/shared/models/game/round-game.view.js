@@ -6,12 +6,12 @@ var RoundGameView = /** @class */ (function () {
     return RoundGameView;
 }());
 exports.RoundGameView = RoundGameView;
-var PlayerNextRoundView = /** @class */ (function () {
-    function PlayerNextRoundView() {
+var PlayerNextRoundViewItem = /** @class */ (function () {
+    function PlayerNextRoundViewItem() {
     }
-    return PlayerNextRoundView;
+    return PlayerNextRoundViewItem;
 }());
-exports.PlayerNextRoundView = PlayerNextRoundView;
+exports.PlayerNextRoundViewItem = PlayerNextRoundViewItem;
 var CardGameViewItem = /** @class */ (function () {
     function CardGameViewItem() {
     }

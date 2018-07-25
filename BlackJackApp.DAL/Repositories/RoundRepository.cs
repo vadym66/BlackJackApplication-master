@@ -10,9 +10,15 @@ namespace BlackJackApp.Services
 {
     public class RoundRepository<T> : IRoundRepository<Round> where T : Round
     {
+        private readonly string _connectionString;
+        public RoundRepository(string con)
+        {
+            _connectionString = con;
+        }
+
         public async Task<int> Add(Round round, int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"INSERT INTO Rounds(PlayerId, CardId, GameId) 
                             OUTPUT Inserted.ID 
@@ -24,7 +30,7 @@ namespace BlackJackApp.Services
 
         public async Task<List<Round>> GetRounds(int gameId)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM Rounds
@@ -44,7 +50,7 @@ namespace BlackJackApp.Services
 
         public async Task<List<Round>> GetRoundsForPlayer(int gameId, string name)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM Rounds

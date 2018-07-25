@@ -1,7 +1,7 @@
 ﻿using BlackJackApp.Services.Enums;
 using System.Collections.Generic;
 
-namespace BlackJackApp.ViewModels
+namespace BlackJackApp.ViewModels.HistoryModels
 {
     public class DetailHistoryView
     {
@@ -11,11 +11,22 @@ namespace BlackJackApp.ViewModels
 
         public int CardSum { get; set; }
 
-        public List<CardHistoryView> Cards { get; set; }
+        public List<CardHistoryViewItem> Cards { get; set; }
 
         public DetailHistoryView()
         {
-            Cards = new List<CardHistoryView>();
+            Cards = new List<CardHistoryViewItem>();
         }
+    }
+
+    public class CardHistoryViewItem
+    {
+        public int Id { get; set; }
+
+        public string Rank { get; set; }
+
+        public string Suit { get; set; }
+
+        public int Value { get; set; }
     }
 }

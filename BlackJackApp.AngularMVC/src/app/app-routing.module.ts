@@ -16,7 +16,7 @@ const routes: Routes = [
         loadChildren: './history/history.module#HistoryModule'
     },
     {
-        path: 'round/:id',
+        path: 'game/:id',
         loadChildren: './round/round.module#RoundModule'
     }
 ];

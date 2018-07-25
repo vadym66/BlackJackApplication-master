@@ -1,46 +1,4 @@
-﻿@model IEnumerable<DetailHistoryViewModel>
-
-<style>
-    .flex-container {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-flow: row wrap;
-        justify-content: space-around;
-        /*align-items: flex-end;*/
-    }
-
-    .flex-item {
-        padding: 5px;
-        width: 200px;
-        height: 300px;
-        margin-top: 10px;
-        line-height: 30px;
-        color: black;
-        font-weight: bold;
-        font-size: medium;
-        text-align: center;
-    }
-
-    ul {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        text-align: center;
-        font-weight: 100
-    }
-
-    li {
-        text-align: center;
-    }
-</style>
-
-<ul class="flex-container">
+﻿<ul class="flex-container">
     @foreach (var user in Model)
     {
 

@@ -1,21 +1,20 @@
 ﻿import { PlayerRoleEnumView } from '../enums/player-role-enum.view';
 import { PlayerStatusEnumView } from '../enums/player-status-enum.view';
 
-
 export class RoundGameView {
     gameId: number;
     isResultComplete: boolean;
-    users: PlayerNextRoundView[];
+    users: PlayerNextRoundViewItem[];
 }
 
-export class PlayerNextRoundView {
+export class PlayerNextRoundViewItem {
     cardSum: number;
     cards: CardGameViewItem[];
     gameId: number;
     playerId: number;
     playerRole: PlayerRoleEnumView;
     playerStatus: PlayerStatusEnumView;
-    roundId: number;
+    
     userName: string;
 }
 

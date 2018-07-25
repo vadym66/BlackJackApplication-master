@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJackApp.Services.Enums
 {
-    public enum PlayerStatus
+    public enum PlayerStatusEnumView
     {
         DefaultValue = 0,
         Lose = 1,

@@ -160,16 +160,15 @@ var StartGameComponent = /** @class */ (function () {
         this.emptyItem = true;
         this.startGameService.getPlayers()
             .subscribe(function (data) {
-            for (var i = 0; i < data.length; i++) {
-                _this.users[i] = data[i].name;
+            for (var i = 0; i < data.users.length; i++) {
+                _this.users[i] = data.users[i].name;
             }
         });
     };
     StartGameComponent.prototype.onButtonClick = function () {
         var _this = this;
         this.startGameService.createGame(this.startModel).subscribe(function (result) {
-            console.log(result);
-            _this.router.navigate(['/round', result]);
+            _this.router.navigate(['/game', result]);
         });
     };
     StartGameComponent.prototype.onValueChange = function (value) {

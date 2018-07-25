@@ -105,11 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbConnection\ConnectionFactory.cs" />
-    <Compile Include="RepositoriesInterfaces\ICardRepository.cs" />
-    <Compile Include="RepositoriesInterfaces\IGameRepository.cs" />
-    <Compile Include="RepositoriesInterfaces\IPlayerRepository.cs" />
-    <Compile Include="RepositoriesInterfaces\IPlayersGameRepository.cs" />
-    <Compile Include="RepositoriesInterfaces\IRoundRepository.cs" />
+    <Compile Include="Interfaces\ICardRepository.cs" />
+    <Compile Include="Interfaces\IGameRepository.cs" />
+    <Compile Include="Interfaces\IPlayerRepository.cs" />
+    <Compile Include="Interfaces\IPlayersGameRepository.cs" />
+    <Compile Include="Interfaces\IRoundRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CardRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />

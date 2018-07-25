@@ -2,7 +2,7 @@
 using BlackJackApp.DataAccess.Interface;
 using BlackJackApp.Entities.Entities;
 using BlackJackApp.Services.ServiceInterfaces;
-using BlackJackApp.ViewModels;
+using BlackJackApp.ViewModels.HistoryModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace BlackJackApp.Services.Services
 
         public async Task<IEnumerable<ShowGamesHistoryView>> GetLastTenGames(int offset)
         {
-            var query =  await _gameRepository.GetLastTen(offset);
+            var query = await _gameRepository.GetLastTen(offset);
 
             return await CreateGameHistoryViewModel(query);
         }
@@ -87,7 +87,7 @@ namespace BlackJackApp.Services.Services
 
                 foreach (var item in round)
                 {
-                    var cardViewModel = new CardHistoryView();
+                    var cardViewModel = new CardHistoryViewItem();
 
                     cardViewModel.Rank = item.Card.Rank.ToString();
                     cardViewModel.Suit = item.Card.Suit.ToString();

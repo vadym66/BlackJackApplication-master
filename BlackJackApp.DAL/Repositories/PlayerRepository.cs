@@ -11,9 +11,16 @@ namespace BlackJackApp.Services
 {
     public class PlayerRepository<T> : IPlayerRepository<Player> where T : Player
     {
+        private readonly string _connectionString;
+        public PlayerRepository(string con)
+        {
+            _connectionString = con;
+        }
+
+
         public async Task<int> Add(Player player)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 return await connection.InsertAsync(player);
             }
@@ -21,7 +28,7 @@ namespace BlackJackApp.Services
 
         public async Task<IEnumerable<string>> GetAll()
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT DISTINCT  Players.Name 
                             FROM Players
@@ -33,7 +40,7 @@ namespace BlackJackApp.Services
 
         public async Task<Player> GetHuman(string name)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT Players.Id, Players.Name, Players.PlayerRole
                             FROM Players
@@ -45,7 +52,7 @@ namespace BlackJackApp.Services
 
         public async Task<IEnumerable<Player>> GetBots(int botNumber)
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT TOP (@BotNumber) * 
                             FROM Players 
@@ -58,7 +65,7 @@ namespace BlackJackApp.Services
 
         public async Task<Player> GetDealer()
         {
-            using (var connection = ConnectionFactory.GetOpenDbConnection())
+            using (var connection = ConnectionFactory.GetOpenDbConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM Players

@@ -1,0 +1,2 @@
+﻿$("#toHistory").kendoButton();
+$("#toStart").kendoButton();

@@ -14,8 +14,8 @@ export class GameService {
 
     constructor(private http: HttpClient) { }
 
-    getPlayers(): Observable<UserView[]> {
-        return this.http.get<UserView[]>(this.url + 'getPlayers');
+    getPlayers(): Observable<UserView> {
+        return this.http.get<UserView>(this.url + 'getPlayers');
     }
 
     createGame(startModel: StartGameView): Observable<number> {

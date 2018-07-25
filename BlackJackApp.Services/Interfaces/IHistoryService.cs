@@ -1,4 +1,4 @@
-﻿using BlackJackApp.ViewModels;
+﻿using BlackJackApp.ViewModels.HistoryModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

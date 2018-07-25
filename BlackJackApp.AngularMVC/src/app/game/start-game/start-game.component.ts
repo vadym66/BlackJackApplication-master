@@ -17,7 +17,6 @@ export class StartGameComponent implements OnInit {
     botItems: number[] = [0, 1, 2, 3, 4, 5];
     users: string[] = [];
     startModel: StartGameView = new StartGameView();
-    num: number;
     emptyItem: boolean;
 
     constructor(private startGameService: GameService, private router: Router) {
@@ -27,15 +26,14 @@ export class StartGameComponent implements OnInit {
         this.emptyItem = true;
         this.startGameService.getPlayers()
             .subscribe(data => {
-                for (var i = 0; i < data.length; i++) {
-                    this.users[i] = data[i].name;
+                for (var i = 0; i < data.users.length; i++) {
+                    this.users[i] = data.users[i].name;
                 }
             })
     }
     onButtonClick() {
         this.startGameService.createGame(this.startModel).subscribe(result => {
-            console.log(result);
-            this.router.navigate(['/round', result]);
+            this.router.navigate(['/game', result]);
         })
     }
     

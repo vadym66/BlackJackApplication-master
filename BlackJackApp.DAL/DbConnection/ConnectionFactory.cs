@@ -6,9 +6,9 @@ namespace BlackJackApp.DAL.Dapper
 {
     public class ConnectionFactory
     {
-        public static DbConnection GetOpenDbConnection()
+        public static DbConnection GetOpenDbConnection(string con)
         {
-            var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["BlackJackDb"].ConnectionString);
+            var connection = new SqlConnection(con);
             connection.Open();
 
             return connection;

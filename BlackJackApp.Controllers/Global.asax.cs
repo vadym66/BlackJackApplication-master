@@ -17,9 +17,9 @@ namespace BlackJackApp.Controllers
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             AutofacConfig.ConfigureContainer(builder, ConfigurationManager.ConnectionStrings["BlackJackDb"].ConnectionString);
-            AreaRegistration.RegisterAllAreas();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

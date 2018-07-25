@@ -3,10 +3,9 @@ using BlackJackApp.DataAccess.Interface;
 using BlackJackApp.Entities.Entities;
 using BlackJackApp.Entities.Enums;
 using BlackJackApp.Services.Enums;
+using BlackJackApp.ViewModels.GameModels;
 using BlackJackApp.Services.ServiceInterfaces;
-using BlackJackApp.ViewModels;
 using BlackJackApp.ViewModels.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +35,7 @@ namespace BlackJackApp.Services
             _playersGameRepository = playersGameRepository;
         }
 
-        public async Task<int> StartGameForApi(StartGameView viewFromUI)
+        public async Task<int> StartGame(StartGameView viewFromUI)
         {
             int gameId = await CreateGame(viewFromUI.PlayerName, viewFromUI.BotQuantity);
             var rounds = new List<Round>();
@@ -51,7 +50,7 @@ namespace BlackJackApp.Services
             return gameId;
         }
 
-        public async Task<RoundGameView> GetRounds(int id)
+        public async Task<RoundGameView> GetFirstRound(int id)
         {
             var rounds = await _roundRepository.GetRounds(id);
 
@@ -63,37 +62,18 @@ namespace BlackJackApp.Services
 
         }
 
-        public async Task<RoundGameView> StartGame(StartGameView viewFromUI)
+        public async Task<UserView> GetPlayers()
         {
-            int gameId = await CreateGame(viewFromUI.PlayerName, viewFromUI.BotQuantity);
-            var rounds = new List<Round>();
-
-            rounds.AddRange(await CreateHuman(viewFromUI.PlayerName, gameId));
-            if (viewFromUI.BotQuantity != 0)
-            {
-                rounds.AddRange(await CreateBots(viewFromUI.BotQuantity, gameId));
-            }
-            rounds.AddRange(await CreateDealer(gameId));
-
-            var roundModel = await MappingToViewModel(rounds);
-
-            await CheckRules(roundModel);
-
-            return await CompleteRound(roundModel);
-        }
-
-        public async Task<IEnumerable<UserViewModel>> GetPlayers()
-        {
-            var userList = new List<UserViewModel>();
             var result = await _playerRepository.GetAll();
 
-            foreach (var item in result)
+            var users = new UserView();
+            foreach (var name in result)
             {
-                var user = new UserViewModel();
-                user.Name = item;
-                userList.Add(user);
+                var usersViewItem = new UserViewItem();
+                usersViewItem.Name = name;
+                users.Users.Add(usersViewItem);
             }
-            return userList;
+            return users;
         }
 
         private async Task<RoundGameView> CompleteRound(RoundGameView roundModel)
@@ -101,8 +81,8 @@ namespace BlackJackApp.Services
             var humanPlayer = GetHumanPlayer(roundModel.Users);
             var dealer = GetDealer(roundModel.Users);
 
-            if (humanPlayer.PlayerStatus == PlayerStatus.Lose &&
-                dealer.PlayerStatus == PlayerStatus.DefaultValue)
+            if (humanPlayer.PlayerStatus == PlayerStatusEnumView.Lose &&
+                dealer.PlayerStatus == PlayerStatusEnumView.DefaultValue)
             {
                 if (roundModel.Users.Count > 2)
                 {
@@ -112,13 +92,13 @@ namespace BlackJackApp.Services
                 roundModel.IsResultComplete = true;
                 return roundModel;
             }
-            if (dealer.PlayerStatus == PlayerStatus.Winner)
+            if (dealer.PlayerStatus == PlayerStatusEnumView.Winner)
             {
                 foreach (var player in roundModel.Users)
                 {
-                    if (player.PlayerStatus == PlayerStatus.DefaultValue)
+                    if (player.PlayerStatus == PlayerStatusEnumView.DefaultValue)
                     {
-                        player.PlayerStatus = PlayerStatus.Lose;
+                        player.PlayerStatus = PlayerStatusEnumView.Lose;
                     }
                 };
                 roundModel.IsResultComplete = true;
@@ -126,20 +106,20 @@ namespace BlackJackApp.Services
                 return roundModel;
             }
 
-            if (dealer.PlayerStatus == PlayerStatus.Lose)
+            if (dealer.PlayerStatus == PlayerStatusEnumView.Lose)
             {
                 foreach (var player in roundModel.Users)
                 {
-                    if (player.PlayerStatus == PlayerStatus.DefaultValue)
+                    if (player.PlayerStatus == PlayerStatusEnumView.DefaultValue)
                     {
-                        player.PlayerStatus = PlayerStatus.Winner;
+                        player.PlayerStatus = PlayerStatusEnumView.Winner;
                     }
                 };
                 roundModel.IsResultComplete = true;
                 return roundModel;
             }
 
-            if (humanPlayer.PlayerStatus == PlayerStatus.Winner)
+            if (humanPlayer.PlayerStatus == PlayerStatusEnumView.Winner)
             {
                 return await FinalPointsCount(roundModel);
             }
@@ -147,7 +127,7 @@ namespace BlackJackApp.Services
             return roundModel;
         }
 
-        public async Task<RoundGameView> NextRoundForPlayers(int gameId)
+        public async Task<RoundGameView> CreateNextRoundForPlayers(int gameId)
         {
             var rounds = new List<Round>();
 
@@ -178,7 +158,7 @@ namespace BlackJackApp.Services
             return await CompleteRound(roundModel);
         }
 
-        public async Task<RoundGameView> NextRoundForDealer(int gameId)
+        public async Task<RoundGameView> CreateNextRoundForDealer(int gameId)
         {
             var rounds = new List<Round>();
             rounds = await _roundRepository.GetRounds(gameId);
@@ -195,34 +175,34 @@ namespace BlackJackApp.Services
 
             foreach (var player in roundModel.Users)
             {
-                if (player.PlayerStatus == PlayerStatus.DefaultValue)
+                if (player.PlayerStatus == PlayerStatusEnumView.DefaultValue)
                 {
                     if (player.CardSum > dealer.CardSum &&
                         player.CardSum < twentyOnePoint)
                     {
-                        player.PlayerStatus = PlayerStatus.Winner;
+                        player.PlayerStatus = PlayerStatusEnumView.Winner;
                     }
                     if (player.CardSum < twentyOnePoint &&
                         player.CardSum > dealer.CardSum)
                     {
-                        player.PlayerStatus = PlayerStatus.Winner;
+                        player.PlayerStatus = PlayerStatusEnumView.Winner;
                     }
                     if (player.CardSum < twentyOnePoint &&
                         player.CardSum < dealer.CardSum)
                     {
-                        player.PlayerStatus = PlayerStatus.Lose;
+                        player.PlayerStatus = PlayerStatusEnumView.Lose;
                     }
                     if (player.CardSum < dealer.CardSum &&
                         dealer.CardSum < twentyOnePoint)
                     {
-                        player.PlayerStatus = PlayerStatus.Lose;
+                        player.PlayerStatus = PlayerStatusEnumView.Lose;
                     }
                     if (player.CardSum == dealer.CardSum)
                     {
-                        player.PlayerStatus = PlayerStatus.Draw;
+                        player.PlayerStatus = PlayerStatusEnumView.Draw;
                     }
                 }
-                if (player.PlayerRole == PlayerRole.Dealer)
+                if (player.PlayerRole == PlayerRoleEnumView.Dealer)
                 {
                     player.PlayerStatus = dealer.PlayerStatus;
                 }
@@ -339,7 +319,7 @@ namespace BlackJackApp.Services
             return round;
         }
 
-        private async Task CreateNextRoundForDealer(PlayerNextRoundView dealer)
+        private async Task CreateNextRoundForDealer(PlayerNextRoundViewItem dealer)
         {
             var round = new Round();
             var card = new Card();
@@ -350,7 +330,7 @@ namespace BlackJackApp.Services
             round.GameId = dealer.GameId;
             round.CardId = card.Id;
 
-            var cardViewModel = new CardGameView();
+            var cardViewModel = new CardGameViewItem();
             cardViewModel.Rank = card.Rank.ToString();
             cardViewModel.Suit = card.Suit.ToString();
             cardViewModel.Value = card.Value;
@@ -372,11 +352,11 @@ namespace BlackJackApp.Services
             }
         }
 
-        private async Task CheckDealer(List<PlayerNextRoundView> players)
+        private async Task CheckDealer(List<PlayerNextRoundViewItem> players)
         {
             foreach (var player in players)
             {
-                if (player.PlayerRole == PlayerRole.Dealer)
+                if (player.PlayerRole == PlayerRoleEnumView.Dealer)
                 {
                     if (player.CardSum < dealerPointBorder)
                     {
@@ -389,11 +369,11 @@ namespace BlackJackApp.Services
             }
         }
         
-        private PlayerNextRoundView GetHumanPlayer(List<PlayerNextRoundView> players)
+        private PlayerNextRoundViewItem GetHumanPlayer(List<PlayerNextRoundViewItem> players)
         {
             foreach (var player in players)
             {
-                if (player.PlayerRole == PlayerRole.Human)
+                if (player.PlayerRole == PlayerRoleEnumView.Human)
                 {
                     return player;
                 }
@@ -401,11 +381,11 @@ namespace BlackJackApp.Services
             return null;
         }
 
-        private PlayerNextRoundView GetDealer(List<PlayerNextRoundView> players)
+        private PlayerNextRoundViewItem GetDealer(List<PlayerNextRoundViewItem> players)
         {
             foreach (var player in players)
             {
-                if (player.PlayerRole == PlayerRole.Dealer)
+                if (player.PlayerRole == PlayerRoleEnumView.Dealer)
                 {
                     return player;
                 }
@@ -417,23 +397,21 @@ namespace BlackJackApp.Services
         {
             var result = rounds.GroupBy(p => p.Player.Name);
             var roundViewModel = new RoundGameView();
-            int gameId = 0;
 
             foreach (var round in result)
             {
-                var userModel = new PlayerNextRoundView();
+                var userModel = new PlayerNextRoundViewItem();
                 userModel.UserName = round.Key;
 
                 foreach (var item in round)
                 {
-                    var cardViewModel = new CardGameView();
+                    var cardViewModel = new CardGameViewItem();
                     PlayerGames playerGames = await GetPlayerStatus(item.PlayerId, item.GameId);
 
                     userModel.PlayerId = item.PlayerId;
                     userModel.GameId = item.GameId;
-                    gameId = item.GameId;
-                    userModel.PlayerRole = (PlayerRole)item.Player.PlayerRole;
-                    userModel.PlayerStatus = (PlayerStatus)playerGames.Status;
+                    userModel.PlayerRole = (PlayerRoleEnumView)item.Player.PlayerRole;
+                    userModel.PlayerStatus = (PlayerStatusEnumView)playerGames.Status;
 
                     cardViewModel.Rank = item.Card.Rank.ToString();
                     cardViewModel.Suit = item.Card.Suit.ToString();
@@ -444,7 +422,7 @@ namespace BlackJackApp.Services
                 }
                 roundViewModel.Users.Add(userModel);
             }
-            roundViewModel.GameId = gameId;
+            roundViewModel.GameId = rounds[0].GameId;
 
             return roundViewModel;
         }
@@ -463,13 +441,15 @@ namespace BlackJackApp.Services
             {
                 if (player.CardSum == twentyOnePoint)
                 {
-                    player.PlayerStatus = PlayerStatus.Winner;
+                    player.PlayerStatus = PlayerStatusEnumView.Winner;
                 }
                 if (player.CardSum > twentyOnePoint) //check for more than twenty one
                 {
-                    player.PlayerStatus = PlayerStatus.Lose;
+                    player.PlayerStatus = PlayerStatusEnumView.Lose;
                 }
             }
         }
+
+      
     }
 }

@@ -1,9 +1,5 @@
 ﻿using BlackJackApp.Services.ServiceInterfaces;
-using BlackJackApp.ViewModels;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -41,15 +37,9 @@ namespace BlackJackApp.Controllers.Controllers
             return View(games);
         }
 
-        public async Task<ActionResult> Test()
-        {
-            var games = await _historyService.GetLastTenGames(offset: 0);
-
-            return View(games);
-        }
 
         
-        public async Task<string> Test2(int offset)
+        public async Task<string> GetNextGames(int offset)
         {
             var games = await _historyService.GetLastTenGames(offset);
 

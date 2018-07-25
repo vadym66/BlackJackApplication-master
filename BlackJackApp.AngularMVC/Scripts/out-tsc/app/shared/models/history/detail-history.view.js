@@ -6,10 +6,10 @@ var DetailHistoryView = /** @class */ (function () {
     return DetailHistoryView;
 }());
 exports.DetailHistoryView = DetailHistoryView;
-var CardHistoryView = /** @class */ (function () {
-    function CardHistoryView() {
+var CardHistoryViewItem = /** @class */ (function () {
+    function CardHistoryViewItem() {
     }
-    return CardHistoryView;
+    return CardHistoryViewItem;
 }());
-exports.CardHistoryView = CardHistoryView;
+exports.CardHistoryViewItem = CardHistoryViewItem;
 //# sourceMappingURL=detail-history.view.js.map

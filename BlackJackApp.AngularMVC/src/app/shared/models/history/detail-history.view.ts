@@ -2,10 +2,10 @@
     userName: string;
     status: string;
     cardSum: number;
-    cards: CardHistoryView[];
+    cards: CardHistoryViewItem[];
 }
 
-export class CardHistoryView {
+export class CardHistoryViewItem {
     id: number;
     rank: string;
     suit: string;

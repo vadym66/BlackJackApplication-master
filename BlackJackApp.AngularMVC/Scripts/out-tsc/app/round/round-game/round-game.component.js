@@ -21,8 +21,10 @@ var RoundGameComponent = /** @class */ (function () {
     }
     RoundGameComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = this.route.snapshot.paramMap.get('id');
-        this.gameId = parseInt(id);
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.gameId = id;
+        });
         this.gameService.getRounds(this.gameId).subscribe(function (result) {
             _this.roundView = result;
             _this.complete = _this.roundView.isResultComplete;

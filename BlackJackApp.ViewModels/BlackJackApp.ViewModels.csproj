@@ -91,17 +91,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameModels\CardGameView.cs" />
-    <Compile Include="HistoryModels\CardHistoryView.cs" />
-    <Compile Include="Enums\PlayerRole.cs" />
-    <Compile Include="Enums\PlayerStatus.cs" />
+    <Compile Include="Enums\PlayerRoleEnumView.cs" />
+    <Compile Include="Enums\PlayerStatusEnumView.cs" />
     <Compile Include="GameModels\StartGameView.cs" />
     <Compile Include="HistoryModels\ShowGamesHistoryView.cs" />
     <Compile Include="GameModels\RoundGameView.cs" />
     <Compile Include="HistoryModels\DetailHistoryView.cs" />
-    <Compile Include="GameModels\PlayerNextRoundView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameModels\UserViewModel.cs" />
+    <Compile Include="GameModels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

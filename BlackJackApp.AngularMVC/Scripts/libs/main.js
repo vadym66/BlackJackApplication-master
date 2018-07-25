@@ -81,7 +81,7 @@ var routes = [
         loadChildren: './history/history.module#HistoryModule'
     },
     {
-        path: 'round/:id',
+        path: 'game/:id',
         loadChildren: './round/round.module#RoundModule'
     }
 ];
@@ -101,17 +101,6 @@ var AppRoutingModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/app.component.css":
-/*!***********************************!*\
-  !*** ./src/app/app.component.css ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".navbar {\r\n    min-height: 90px;\r\n}\r\n"
-
-/***/ }),
-
 /***/ "./src/app/app.component.html":
 /*!************************************!*\
   !*** ./src/app/app.component.html ***!
@@ -119,7 +108,7 @@ module.exports = ".navbar {\r\n    min-height: 90px;\r\n}\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n    <a class=\"navbar-brand\" href=\"#\">BlackJack</a>\r\n    <ul class=\"navbar-nav mr-auto\">\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLink=\"/start\">Start game</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLink=\"/history\">History</a>\r\n        </li>\r\n    </ul>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n"
+module.exports = "<header></header>\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
@@ -143,13 +132,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'app';
     }
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
-            styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
+            template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html")
         })
     ], AppComponent);
     return AppComponent;
@@ -176,6 +163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _progress_kendo_angular_grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @progress/kendo-angular-grid */ "./node_modules/@progress/kendo-angular-grid/dist/es/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _header_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./header.component */ "./src/app/header.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -189,13 +177,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+                _header_component__WEBPACK_IMPORTED_MODULE_7__["HeaderComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -209,6 +199,64 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/header.component.css":
+/*!**************************************!*\
+  !*** ./src/app/header.component.css ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".navbar {\r\n    min-height: 90px;\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/header.component.html":
+/*!***************************************!*\
+  !*** ./src/app/header.component.html ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n    <a class=\"navbar-brand\" href=\"#\">BlackJack</a>\r\n    <ul class=\"navbar-nav mr-auto\">\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLink=\"/start\">Start game</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLink=\"/history\">History</a>\r\n        </li>\r\n    </ul>\r\n</nav>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/header.component.ts":
+/*!*************************************!*\
+  !*** ./src/app/header.component.ts ***!
+  \*************************************/
+/*! exports provided: HeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var HeaderComponent = /** @class */ (function () {
+    function HeaderComponent() {
+        this.title = 'app';
+    }
+    HeaderComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'header',
+            template: __webpack_require__(/*! ./header.component.html */ "./src/app/header.component.html"),
+            styles: [__webpack_require__(/*! ./header.component.css */ "./src/app/header.component.css")]
+        })
+    ], HeaderComponent);
+    return HeaderComponent;
 }());
 
 

@@ -13,13 +13,15 @@ var animations_1 = require("@angular/platform-browser/animations");
 var kendo_angular_grid_1 = require("@progress/kendo-angular-grid");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("../app/app-routing.module");
+var header_component_1 = require("./header.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                header_component_1.HeaderComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,

@@ -1,0 +1,15 @@
+﻿<form action="~/Game/StartGame" method="post" id="form">
+    <ul id="fieldList">
+        <li style="text-align:center">
+            <h4><label for="name">Start Game </label></h4>
+            <input type="text" id="name" name="PlayerName" class="k-textbox" placeholder="Enter your name..." style="width: 220px;" />
+        </li>
+        <li style="text-align:center">
+            <input id="dropElementId" name="BotQuantity" />
+        </li>
+        <li style="text-align:center">
+            <button id="startbutton" type="button">Press to start</button>
+        </li>
+    </ul>
+</form>
+@Scripts.Render("~/bundles/StartGameView/start-game")

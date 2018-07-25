@@ -1,4 +1,4 @@
-﻿namespace BlackJackApp.ViewModels
+﻿namespace BlackJackApp.ViewModels.GameModels
 {
     public class StartGameView
     {

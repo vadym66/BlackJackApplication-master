@@ -212,10 +212,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\game\start-game\start-game.component.css" />
     <Content Include="src\app\game\start-game\start-game.component.html" />
+    <Content Include="src\app\header.component.css" />
+    <Content Include="src\app\header.component.html" />
     <Content Include="src\app\history\history-details\history-details.component.html" />
     <Content Include="src\app\history\history-grid\history-grid.component.css" />
     <Content Include="src\app\history\history-grid\history-grid.component.html" />
@@ -238,15 +239,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="src\app\history\history-details\history-details.component.css" />
     <None Include="src\styles.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -271,6 +268,7 @@
     <TypeScriptCompile Include="src\app\game\start-game-routing.module.ts" />
     <TypeScriptCompile Include="src\app\game\start-game.module.ts" />
     <TypeScriptCompile Include="src\app\game\start-game\start-game.component.ts" />
+    <TypeScriptCompile Include="src\app\header.component.ts" />
     <TypeScriptCompile Include="src\app\history\history-details\history-details.component.ts" />
     <TypeScriptCompile Include="src\app\history\history-grid\history-grid.component.ts" />
     <TypeScriptCompile Include="src\app\history\history-routing.module.ts" />

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HistoryService } from '../../shared/services/history.service';
 import { DetailHistoryView } from '../../shared/models/history/detail-history.view';
 
-
 @Component({
     selector: 'app-history-details',
     templateUrl: './history-details.component.html',

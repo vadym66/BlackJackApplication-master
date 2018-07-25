@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlackJackApp.ViewModels
+namespace BlackJackApp.ViewModels.HistoryModels
 {
     public class ShowGamesHistoryView
     {
