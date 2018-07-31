@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RoundGuardService } from 'src/app/shared/services/round-guard.service';
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
     },
     {
         path: 'game/:id',
+        canActivate: [RoundGuardService],
         loadChildren: './round/round.module#RoundModule'
     }
 ];

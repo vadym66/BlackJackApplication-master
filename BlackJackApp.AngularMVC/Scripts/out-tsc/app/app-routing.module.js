@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var round_guard_service_1 = require("src/app/shared/services/round-guard.service");
 var routes = [
     {
         path: '',
@@ -24,6 +25,7 @@ var routes = [
     },
     {
         path: 'game/:id',
+        canActivate: [round_guard_service_1.RoundGuardService],
         loadChildren: './round/round.module#RoundModule'
     }
 ];

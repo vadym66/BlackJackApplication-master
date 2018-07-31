@@ -10,27 +10,27 @@ import { RoundGameView } from '../models/game/round-game.view';
 
 export class GameService {
 
-    url = 'http://localhost:54796/game/';
+    private _url = 'http://localhost:54796/game/';
 
     constructor(private http: HttpClient) { }
 
     getPlayers(): Observable<UserView> {
-        return this.http.get<UserView>(this.url + 'getPlayers');
+        return this.http.get<UserView>(this._url + 'getPlayers');
     }
 
     createGame(startModel: StartGameView): Observable<number> {
-        return this.http.post<number>(this.url + 'create', startModel);
+        return this.http.post<number>(this._url + 'create', startModel);
     }
 
     getRounds(id: number): Observable<RoundGameView> {
-        return this.http.get<RoundGameView>(this.url + 'getRounds/' + id);
+        return this.http.get<RoundGameView>(this._url + 'getRounds/' + id);
     }
 
     getNextRound(id: number): Observable<RoundGameView> {
-        return this.http.get<RoundGameView>(this.url + 'getNextRound/' + id);
+        return this.http.get<RoundGameView>(this._url + 'getNextRound/' + id);
     }
 
     getNextRoundForDealer(id: number): Observable<RoundGameView> {
-        return this.http.get<RoundGameView>(this.url + 'getRoundForDealer/' + id);
+        return this.http.get<RoundGameView>(this._url + 'getRoundForDealer/' + id);
     }
 }

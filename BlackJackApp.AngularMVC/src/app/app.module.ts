@@ -7,6 +7,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from '../app/app-routing.module';
 import { HeaderComponent } from './header.component';
+import { RoundGuardService } from './shared/services/round-guard.service';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { HeaderComponent } from './header.component';
         HttpClientModule,
         GridModule
     ],
-    providers: [],
+    providers: [ RoundGuardService ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

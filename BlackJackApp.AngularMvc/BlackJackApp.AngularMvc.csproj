@@ -278,6 +278,7 @@
     <TypeScriptCompile Include="src\app\round\round.module.ts" />
     <TypeScriptCompile Include="src\app\shared\services\game.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\history.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\round-guard.service.ts" />
     <TypeScriptCompile Include="src\app\shared\shared-module\shared.module.ts" />
     <TypeScriptCompile Include="src\app\shared\models\enums\player-role-enum.view.ts" />
     <TypeScriptCompile Include="src\app\shared\models\enums\player-status-enum.view.ts" />

@@ -14,6 +14,7 @@ var kendo_angular_grid_1 = require("@progress/kendo-angular-grid");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("../app/app-routing.module");
 var header_component_1 = require("./header.component");
+var round_guard_service_1 = require("./shared/services/round-guard.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -30,7 +31,7 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 kendo_angular_grid_1.GridModule
             ],
-            providers: [],
+            providers: [round_guard_service_1.RoundGuardService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

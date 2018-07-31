@@ -14,22 +14,22 @@ var http_1 = require("@angular/common/http");
 var GameService = /** @class */ (function () {
     function GameService(http) {
         this.http = http;
-        this.url = 'http://localhost:54796/game/';
+        this._url = 'http://localhost:54796/game/';
     }
     GameService.prototype.getPlayers = function () {
-        return this.http.get(this.url + 'getPlayers');
+        return this.http.get(this._url + 'getPlayers');
     };
     GameService.prototype.createGame = function (startModel) {
-        return this.http.post(this.url + 'create', startModel);
+        return this.http.post(this._url + 'create', startModel);
     };
     GameService.prototype.getRounds = function (id) {
-        return this.http.get(this.url + 'getRounds/' + id);
+        return this.http.get(this._url + 'getRounds/' + id);
     };
     GameService.prototype.getNextRound = function (id) {
-        return this.http.get(this.url + 'getNextRound/' + id);
+        return this.http.get(this._url + 'getNextRound/' + id);
     };
     GameService.prototype.getNextRoundForDealer = function (id) {
-        return this.http.get(this.url + 'getRoundForDealer/' + id);
+        return this.http.get(this._url + 'getRoundForDealer/' + id);
     };
     GameService = __decorate([
         core_1.Injectable(),

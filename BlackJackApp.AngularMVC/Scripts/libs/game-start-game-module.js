@@ -168,7 +168,8 @@ var StartGameComponent = /** @class */ (function () {
     StartGameComponent.prototype.onButtonClick = function () {
         var _this = this;
         this.startGameService.createGame(this.startModel).subscribe(function (result) {
-            _this.router.navigate(['/game', result]);
+            var result1 = 'fdf';
+            _this.router.navigate(['/game', result1]);
         });
     };
     StartGameComponent.prototype.onValueChange = function (value) {
